@@ -76,10 +76,14 @@ def snort(n):
         update_board(board, current_player, i, j)
         display_board(board, n)
 
+        print(current_player)
+        if not again(board, n, current_player):
+            break
+
         current_player = get_other_player(current_player)
 
     current_player = get_other_player(current_player)
     print("Le gagnant est le joueur", current_player)
 
 
-snort(5)
+snort(3)

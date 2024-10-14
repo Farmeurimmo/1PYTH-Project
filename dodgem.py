@@ -51,6 +51,8 @@ def select_move(board, n, directions, player, i, j):
 
 
 def possible_move(board, n, directions, player, i, j, m):
+    if board[i][j] != player:
+        return False
     x, y = directions[m]
     i += x
     j += y

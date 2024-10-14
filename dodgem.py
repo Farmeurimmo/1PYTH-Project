@@ -8,6 +8,7 @@ def new_board(n):
 
 
 def display_board(board, n):
+    print("Joueur 1 = x", "Joueur 2 = o")
     max_length = 0
     for i in range(n):
         text = str(i + 1) + (len(str(n)) - len(str(i + 1))) * " " + " | "
@@ -39,17 +40,22 @@ def ask_for_direction():
 
 def select_move(board, n, directions, player, i, j):
     m = ask_for_direction()
-    while m >= len(directions) or m < 0 or (player == 1 and m == 0) or (player == 2 and m == 3):
+    while True:
+        if len(directions) >= m >= 0:
+            if player == 1 and m != 3:  # 4 - 1 (ouest)
+                break
+            if player == 2 and m != 2:  # 3 - 1 (sud)
+                break
         m = ask_for_direction()
     return m
 
 
 def possible_move(board, n, directions, player, i, j, m):
-    if 0 < i or i > n or j > n or j < 0:
-        return False
     x, y = directions[m]
     i += x
     j += y
+    if i >= n or j >= n or j < 0 or i < 0:
+        return True
     return board[i][j] == 0
 
 
@@ -58,6 +64,8 @@ def move(board, n, directions, player, i, j, m):
     board[i][j] = 0
     i += x
     j += y
+    if i >= n or j >= n or j < 0 or i < 0:
+        return
     board[i][j] = player
 
 
@@ -71,9 +79,13 @@ def win(board, n, directions, player):
         for j in range(n):
             if board[i][j] == player:
                 nothing_left = False
-            for m in range((1 if player == 1 else 0), (3 if player == 2 else 4)):
-                if possible_move(board, n, directions, player, i, j, m):
-                    return False
+                for m in range(4):
+                    if player == 1 and m == 4:
+                        continue
+                    if player == 2 and m == 3:
+                        continue
+                    if possible_move(board, n, directions, player, i, j, m):
+                        return False
     return nothing_left
 
 
@@ -94,6 +106,10 @@ def dodgem(n):
 
         move(board, n, directions, current_player, i, j, m)
         display_board(board, n)
+
+        if win(board, n, directions, current_player):
+            current_player = get_other_player(current_player)
+            break
 
         current_player = get_other_player(current_player)
 

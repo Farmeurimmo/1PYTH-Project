@@ -36,7 +36,23 @@ def possible_square(board, n, player, i, j):
         return False
 
 
-n = 120
+def select_square(board, n, player):
+    return int(input("Choisir un numéro de ligne : ")), int(input("Choisir un numéro de colonne : "))
+
+
+def update_board(board, player, i, j):
+    board[i][j] = player
+
+
+def again(board, n, player):
+    for i in range(n):
+        for j in range(n):
+            if not possible_square(board, n, player, i, j):
+                return False
+    return True
+
+
+n = 12
 board = new_board(n)
 
 display_board(board, n)

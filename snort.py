@@ -76,7 +76,6 @@ def snort(n):
         update_board(board, current_player, i, j)
         display_board(board, n)
 
-        print(current_player)
         if not again(board, n, current_player):
             break
 

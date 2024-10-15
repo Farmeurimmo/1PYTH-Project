@@ -36,9 +36,7 @@ def possible_square(board, n, player, i, j):
         return False
     if n > j + 1 > 0 and board[i][j + 1] == other_player:
         return False
-    if board[i][j] != 0:
-        return False
-    return True
+    return board[i][j] == 0
 
 
 def select_square(board, n, player):

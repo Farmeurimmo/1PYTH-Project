@@ -25,16 +25,16 @@ def display_board(board, n):
 
 
 def possible_square(board, n, player, i, j):
-    if i > n or i < 0 or j > n or j < 0:
+    if i >= n or i < 0 or j >= n or j < 0:
         return False
     other_player = get_other_player(player)
-    if n > i - 1 > 0 and board[i - 1][j] == other_player:
+    if n > i - 1 >= 0 and board[i - 1][j] == other_player:
         return False
-    if n > i + 1 > 0 and board[i + 1][j] == other_player:
+    if n > i + 1 >= 0 and board[i + 1][j] == other_player:
         return False
-    if n > j - 1 > 0 and board[i][j - 1] == other_player:
+    if n > j - 1 >= 0 and board[i][j - 1] == other_player:
         return False
-    if n > j + 1 > 0 and board[i][j + 1] == other_player:
+    if n > j + 1 >= 0 and board[i][j + 1] == other_player:
         return False
     return board[i][j] == 0
 
@@ -73,9 +73,6 @@ def snort(n):
 
         update_board(board, current_player, i, j)
         display_board(board, n)
-
-        if not again(board, n, current_player):
-            break
 
         current_player = get_other_player(current_player)
 

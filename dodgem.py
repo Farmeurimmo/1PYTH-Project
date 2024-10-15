@@ -5,6 +5,7 @@ def new_board(n):
     for j in range(1, n):
         board[n - 1][j] = 2
     return board
+    # return [[1, 1, 1, 1],[1, 2, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0]] # position problématique car elle bloque le joueur 2 donc joueur 2 doit être gagnant (fonctionne avec n=4)
 
 
 def display_board(board, n):
@@ -56,8 +57,12 @@ def possible_move(board, n, directions, player, i, j, m):
     x, y = directions[m]
     i += x
     j += y
-    if i >= n or j >= n or j < 0 or i < 0:
+    if player == 1 and m == 1 and j >= n: # 1 = est
         return True
+    if player == 2 and m == 0 and i < 0: # 0 = nord
+        return True
+    if i >= n or j >= n or j < 0 or i < 0:
+        return False
     return board[i][j] == 0
 
 
@@ -76,22 +81,23 @@ def get_other_player(player):
 
 
 def win(board, n, directions, player):
-    nothing_left = True
     for i in range(n):
         for j in range(n):
             if board[i][j] == player:
-                nothing_left = False
                 for m in range(4):
-                    if player == 1 and m == 4:
+                    if player == 1 and m == 3:
                         continue
-                    if player == 2 and m == 3:
+                    if player == 2 and m == 2:
                         continue
                     if possible_move(board, n, directions, player, i, j, m):
                         return False
-    return nothing_left
+    return True
 
 
 def dodgem(n):
+    if n <= 1:
+        print("Merci de choisir un plateau supérieur à 1")
+        return
     directions = ((-1, 0), (0, 1), (1, 0), (0, -1))
     board = new_board(n)
     display_board(board, n)
@@ -110,13 +116,11 @@ def dodgem(n):
         display_board(board, n)
 
         if win(board, n, directions, current_player):
-            current_player = get_other_player(current_player)
             break
 
         current_player = get_other_player(current_player)
 
-    current_player = get_other_player(current_player)
     print("Le gagnant est le joueur", current_player)
 
 
-dodgem(3)
+dodgem(4)

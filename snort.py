@@ -60,6 +60,9 @@ def again(board, n, player):
 
 
 def snort(n):
+    if n <= 0:
+        print("Merci de chosir un plateau positif")
+        return
     board = new_board(n)
     display_board(board, n)
     current_player = 1

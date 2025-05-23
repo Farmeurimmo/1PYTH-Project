@@ -1,5 +1,7 @@
 # Projet SUPINFO - Mini-jeux de stratégie combinatoire en Python
 
+Note obtenue: **80/100**
+
 ## Contexte
 
 - Projet individuel sans soutenance.

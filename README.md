@@ -74,7 +74,3 @@ Programmer en Python deux jeux de stratégie combinatoire abstraits :
 - Pas de variables globales.
 - Code clair, bien structuré.
 - Joindre une documentation expliquant les algorithmes pour chaque jeu.
-
----
-
-Bonne programmation.
